@@ -1,0 +1,120 @@
+.login-container{
+    display: flex;
+    justify-content:center;
+    margin-top: 100px;
+    background-color: #ccc;
+    margin: 50px 100px 50px 100px;
+    border-radius: 5px;
+}
+
+body{
+    background-color: #ccc;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;   
+    color: #fff;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #141414;
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.header
+{
+    text-align: center;
+    font-size: 2rem;
+    background-color: #ccc;
+    margin: 50px 100px 50px 100px;
+    font-weight: bold;
+    margin-top: 2rem;
+    border-radius: 5px;
+    }
+
+
+.login-form {
+    width: 300px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #ccc;
+    
+}
+.user-login, .admin-login {
+    background-color: #616161;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 5px #ccc;
+}
+
+
+h2{
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    padding: 10px;
+    background-color: #ccc;
+    border-radius: 5px;
+    
+}
+label{
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    
+}
+
+input[type="text"],
+input[type="password"]{
+    width: 85%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+input[type="submit"]{
+    background-color: #212221;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+input[type="submit"]:hover{
+
+    background-color: #2a2c2a;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+
+
+
+
+
+
+
+\
+

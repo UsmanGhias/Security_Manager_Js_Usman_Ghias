@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Login Page</title>
+<link rel="stylesheet" type ="text/css" href="LoginPage.css">
+<script defer src="SecurityManager.js"></script>
+<script>
+
+function Admin_Validate()
+{
+    event.preventDefault();
+    var name=document.getElementById("admin-username").value;
+    var password = document.getElementById("admin-password").value;
+    if(SecurityManager.ValidateAdmin(name,password))
+    {
+        window.location.href='AdminHome.html'
+    }
+    else{alert("UnAuthorize Attempt")}
+}
+function User_Validate()
+{
+    event.preventDefault();
+    var name = document.getElementById("user-username").value;
+    var password = document.getelementById("user-password").value;
+
+    const users = SecurityManager.GetAllUsers();
+    console.log(users)
+    for (var i = 0; i< users.length; i++)
+    {
+        if(users[i].login == name && users[i].password == password)
+        {
+            window.location.href = 'usersHome.html?id=' + users[i].ID;
+            return;
+
+        }
+    }
+    alert("UnAuthorize Attempt")
+    }
+
+</script>
+</head>
+<body>
+    <div class = "contanier">
+        <div class = "header">
+            <h1>Security Manager</h1>
+        </div>
+    </div>
+    <div class = "login-container">
+        <div class = "login-form admin-login">
+            <h2>Admin Login</h2>
+            <form onsubmit="Admin_Validate(event)">
+                <label for="admin-username">Username:</label>
+                <input type="text" id="admin-username" name="admin-username" required>
+                <label for="admin-password">Password:</label>
+                <input type="password" id="admin-password" name="admin-password" required>
+                <input type="submit" id="Admin-Login" value="Login">
+            </form>
+        </div>
+        <div class="login-form user-login">
+            <h2>User Login</h2>
+                <label for="user-username"> Usename:</label>
+                <input type="text" id="user-username" name="user-username" required>
+                <label for="user-password">Password:</label>
+                <input type="password" id="user-password" name="user-password" required>
+                <input type="submit" id="User-login" value="Login">
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
