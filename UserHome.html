@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+        margin-left: 300px;
+        margin-right: 300px;
+        padding: 20px;
+        justify-content: center;
+        border: 2px solid #333;
+    }
+
+    #roles, #permissions{
+        margin: 20px;
+        padding: 40px;
+        border: 2px solid #333;
+        border-radius: 5px;
+        background-color: #f8f8f8;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .navbar {
+        overflow: hidden;
+        background-color: #333;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .navbar a {
+        float: left;
+        font-size: 14px;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    .navbar a:hover{
+        background-color: #6D4DFF;
+    }
+</style>
+<script src="SecurityManager.js"></script>
+<script> 
+function Print_Task()
+{
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('id');
+
+    const div1 = document.getElementById('roles');
+    const div2 = document.getElementById('permissions')
+
+    const roles = SecurityManager.GetAllUserRoles()
+    const users = SecurityManager.GetUserById(userId)
+    const Roles_Permissions = SecurityManager.getAllRolePermissions()
+
+    console.log(Roles_Permissions)
+    console.log(users)
+    console.log(roles)
+    const user_permissions =[];
+
+    for(var i = 0; i< roles.length; i++)
+    {
+        if(roles[i].User == user.name){
+            const user_role = roles[i].Role;
+            for (var j = 0; j< Roles_Permissions.length; j++)
+            {
+                if(user_role == Roles_Permissions.length; j++){
+                    user_permissions.push(Roles_Permissions[j].Permission)
+
+                }
+            }
+        
+        const para = document.createelement('p')
+        par.innerText = user_permissions[k]
+        div2.appendChild(par);
+        }
+
+
+
+    }
+
+
+
+}
+
+
+</script>
+
+<body onload="Print_Task()">
+    <div class="navbar">
+        <a href = "AdminHome.html">Home</a>
+        <a href = "Logout.html">Logout</a>
+
+    </div>
+    <div class = "container">
+        <div style="margin: left 60px;">
+            <p style="font-size: 70px;"> Welcome to User Portal</p>
+        </div>
+        <h2> Roles</h2>
+        <div id="roles"> </div>
+        <h2> Permissions</h2>
+        <div id="permissions"> </div>
+    </div>
+
+</body>
+
+</html>
