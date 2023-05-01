@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #ccc;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #6D4DFF;
+        }
+        .user-grid{
+            background-color: white;
+            margin-bottom: auto;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+            margin-top: 10px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            width: 75%;
+            margin-top: 0px;
+            margin-left: 40px;
+        }
+        
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        select {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        button[type="submit"] {
+            background-color: #6D4DFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            float: right;
+        }
+
+        button[type="reset"] {
+            background-color: #455045;
+            color: rgb(247, 243, 243);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            float: left;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #49369c;
+        }
+
+         .Update-Button{
+            float: left;
+        }
+        .Delete-Button{
+            float:left;
+        } 
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+
+        thead th {
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody td:last-child {
+            text-align: center;
+        }
+
+        tbody td a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        tbody td a:hover {
+            text-decoration: underline;
+        }
+
+        h2 {
+            margin-right: 50px;
+            margin-left: 100px;
+            margin-top: 10px;
+            font-size: 35px;
+        }
+    </style>
+    <script defer src="SecurityManager.js"></script>
+    <script defer src="UserManagement.js"></script>
+   
+</head>
+
+<body  onload="refreshUserGrid()">
+
+    <div class="navbar">
+        <a href="AdminHome.html">Home</a>
+        <a href="UserManagement.html">User Management</a>
+        <a href="RoleManagement.html">Role Management</a>
+        <a href="UserPermission.html">Permission Management</a>
+        <a href="RoleManagement">Role-Permission Management</a>
+        <a href="UserRole.html">User-Role Management</a>
+        <a href="Logout.html">Logout</a>
+    </div>
+
+    <h2>User Management</h2>
+    <div class="grid-container" >
+    <div class="form-container">
+        <form id="user-form" onsubmit="Save_User(event)">
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login" required><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="country">Country:</label>
+            <select id="country" name="country" required>
+                <option value="Default" selected >Select</option>
+            </select><br>
+
+            <label for="city">City:</label>
+            <select id="city" name="city" required>
+                
+            </select><br>
+
+            <script>
+                const countrySelect = document.getElementById('country');
+                const citySelect = document.getElementById('city');
+
+                function initCityDropdown(countryId) {
+                    const cities = SecurityManager.GetCitiesByCountryId(countryId);
+
+                    citySelect.innerHTML = '';
+
+                    for (let i = 0; i < cities.length; i++) {
+                        const option = document.createElement('option');
+                        option.value = cities[i].CityID;
+                        option.text = cities[i].Name;
+                        citySelect.add(option);
+                    }
+                }
+
+                function initCountryDropdown() {
+                    const countries = SecurityManager.GetCountries();
+
+                    for (let i = 0; i < countries.length; i++) {
+                        const option = document.createElement('option');
+                        option.value = countries[i].CountryID;
+                        option.text = countries[i].Name;
+                        countrySelect.add(option);
+                    }
+                }
+
+                window.onload = function () {
+                    initCountryDropdown();
+                };
+
+                // add event listener to country dropdown
+                countrySelect.addEventListener('change', function () {
+                    const countryId = this.value;
+                    initCityDropdown(countryId);
+                });
+            </script>
+
+            <button type="reset" id="clear-button">Clear</button>
+            <button type="submit" id="save-button">Save</button>
+
+
+        </form>
+        </div>
+        <div id="user-grid" class="user-grid">
+            
+        </div>
+    </div>
+
+</body>
+
+</html>
