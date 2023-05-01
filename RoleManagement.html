@@ -2,9 +2,9 @@
 <html>
 
 <head>
-    <title>Users Permissions | CODCrafters</title>
-            <link rel="shortcut icon" href="./codcrafters.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Role Management | CODCrafters</title>
+            <link rel="shortcut icon" href="./codcrafters.png" />
     <style>
         .navbar {
             overflow: hidden;
@@ -14,7 +14,6 @@
 
         body {
             background-color: #ccc;
-            margin:0;
         }
 
         .navbar a {
@@ -89,7 +88,7 @@
         }
 
         button[type="submit"]:hover {
-            background-color: #6D4DFF;
+            background-color: #3f2899;
         }
 
          .Update-Button{
@@ -141,11 +140,11 @@
         }
     </style>
     <script defer src="SecurityManager.js"></script>
-    <script defer src="UserPermission.js"></script>
+    <script defer src="RoleManagement.js"></script>
    
 </head>
 
-<body  onload="refreshPermissionGrid()">
+<body  onload="refreshRoleGrid()">
 
     <div class="navbar">
         <a href="AdminHome.html">Home</a>
@@ -157,12 +156,12 @@
         <a href="Logout.html">Logout</a>
     </div>
 
-    <h2>User-Permission Management</h2>
+    <h2>Role Management</h2>
     <div class="grid-container" >
     <div class="form-container">
-        <form id="user-form" onsubmit="Save_Permission()">
-            <label for="Permission Name">Permission Name:</label>
-            <input type="text" id="Permission" name="Permission" required><br>
+        <form id="user-form" onsubmit="Save_Role()">
+            <label for="Role Name">Role Name:</label>
+            <input type="text" id="Role" name="login" required><br>
 
             <label for="Description">Description:</label>
             <input type="text" id="Description" name="password" required><br>
@@ -173,7 +172,7 @@
 
         </form>
         </div>
-        <div id="Permission-grid" class="user-grid">
+        <div id="Role-grid" class="user-grid">
             
         </div>
     </div>

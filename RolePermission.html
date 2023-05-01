@@ -2,9 +2,9 @@
 <html>
 
 <head>
-    <title>Users Permissions | CODCrafters</title>
-            <link rel="shortcut icon" href="./codcrafters.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Role Permissions | CODCrafters</title>
+            <link rel="shortcut icon" href="./codcrafters.png" />
     <style>
         .navbar {
             overflow: hidden;
@@ -14,7 +14,6 @@
 
         body {
             background-color: #ccc;
-            margin:0;
         }
 
         .navbar a {
@@ -29,7 +28,8 @@
         .navbar a:hover {
             background-color: #6D4DFF;
         }
-        .user-grid{
+
+        .user-grid {
             background-color: white;
             margin-bottom: auto;
         }
@@ -48,7 +48,7 @@
             margin-top: 0px;
             margin-left: 40px;
         }
-        
+
 
         label {
             display: block;
@@ -89,15 +89,16 @@
         }
 
         button[type="submit"]:hover {
-            background-color: #6D4DFF;
+            background-color: #402f8d;
         }
 
-         .Update-Button{
+        .Update-Button {
             float: left;
         }
-        .Delete-Button{
-            float:left;
-        } 
+
+        .Delete-Button {
+            float: left;
+        }
 
 
         table {
@@ -141,40 +142,90 @@
         }
     </style>
     <script defer src="SecurityManager.js"></script>
-    <script defer src="UserPermission.js"></script>
-   
+    <script defer src="RolePermission.js"></script>
+
 </head>
 
-<body  onload="refreshPermissionGrid()">
+<body onload="RefreshRolePermissionGrid()">
 
     <div class="navbar">
         <a href="AdminHome.html">Home</a>
         <a href="UserManagement.html">User Management</a>
         <a href="RoleManagement.html">Role Management</a>
         <a href="UserPermission.html">Permission Management</a>
-        <a href="RolePermission.html">Role-Permission Management</a>
+        <a href="RoleManagement.html">Role-Permission Management</a>
         <a href="UserRole.html">User-Role Management</a>
         <a href="Logout.html">Logout</a>
     </div>
 
-    <h2>User-Permission Management</h2>
-    <div class="grid-container" >
-    <div class="form-container">
-        <form id="user-form" onsubmit="Save_Permission()">
-            <label for="Permission Name">Permission Name:</label>
-            <input type="text" id="Permission" name="Permission" required><br>
+    <h2>Role-Permission Management</h2>
+    <div class="grid-container">
+        <div class="form-container">
+            <form id="user-form" onsubmit="Save_RolePermission(event)">
 
-            <label for="Description">Description:</label>
-            <input type="text" id="Description" name="password" required><br>
+                <label for="Role">Role:</label>
+                <select id="Role" name="Role" required>
+                    <option value="Default" selected>Select</option>
+                </select><br>
 
-            <button type="reset" id="clear-button">Clear</button>
-            <button type="submit" id="save-button">Save</button>
+                <label for="Permission">Permission:</label>
+                <select id="Permission" name="Permission" required>
+                    <option value="Select" selected>Select</option>
+                </select><br>
+
+                <script>
+                    const RoleSelect = document.getElementById('Role');
+                    const PermissionSelect = document.getElementById('Permission');
+
+                    function initPermissionDropdown() {
+                        const Permissions = SecurityManager.GetAllPermissions();
+                        console.log(Permissions)
+                        const defaultOption = document.createElement('option');
 
 
-        </form>
+                        PermissionSelect.innerHTML = '';
+
+                        for (let i = 0; i < Permissions.length; i++) {
+                            const option = document.createElement('option');
+                            option.value = Permissions[i].Permission;
+                            option.text = Permissions[i].Permission;
+                            PermissionSelect.add(option);
+                        }
+                        defaultOption.value = "Default";
+                        defaultOption.selected = true;
+                        defaultOption.disabled = true;
+                        defaultOption.text = "Select";
+                        PermissionSelect.add(defaultOption);
+                    }
+
+                    function initRolesDropdown() {
+                        const Roles = SecurityManager.GetAllRoles();
+                        console.log(Roles)
+
+                        for (let i = 0; i < Roles.length; i++) {
+                            const option = document.createElement('option');
+                            option.value = Roles[i].Role;
+                            option.text = Roles[i].Role;
+                            RoleSelect.add(option);
+                        }
+                    }
+
+                    window.onload = function () {
+                        initRolesDropdown();
+                        initPermissionDropdown();
+                    };
+
+
+                </script>
+
+                <button type="reset" id="clear-button">Clear</button>
+                <button type="submit" id="save-button">Save</button>
+
+
+            </form>
         </div>
-        <div id="Permission-grid" class="user-grid">
-            
+        <div id="Role-Permission-grid" class="user-grid">
+
         </div>
     </div>
 
